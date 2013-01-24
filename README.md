@@ -39,7 +39,7 @@ This application demonstrates:
 
 * Storing and retreiving data from a collection
 * Simple geolocation querying
-* Integretiong with Kinvey, Google Maps API, and ActionBarSherlock
+* Integrating with Kinvey, Google Maps API, and ActionBarSherlock
 
 ## Design
 
