@@ -1,12 +1,5 @@
 GeoTag is a sample application utilizing Google Map's API with Kinvey's Backend to allow users to both add and view annotations on a map.
 
-To get started, download the source for the project from GitHub:
-
-`<GITHUB LINK>`
-
-Once you have the code, import/open it up in your favorite editor and let's get started.
-
-
 ## Get it running
 
 There are two pre-requirements for getting this project to run:
