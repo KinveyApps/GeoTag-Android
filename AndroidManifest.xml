@@ -12,7 +12,7 @@
         android:name="com.kinvey.samples.geotag.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.kinvey.sample.geotag.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.kinvey.samples.geotag.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
