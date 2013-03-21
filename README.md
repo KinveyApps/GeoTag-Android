@@ -10,8 +10,7 @@ There are some initial steps required for getting this project to run:
 3.  Download [ActionBarSherlock](http://actionbarsherlock.com/) and in Eclipse, go `File` -> `New` -> `Android Project from Existing Source` and navigate to the ActionBarSherlock directory.
 4.  In Eclipse, go `File` -> `New` -> `Android project from Existing Source`, and navigate to the directory you downloaded the Android SDK, then goto: <sdkDirectory>/extras/google/google_play_services/lib_project and import google-play_services_lib as a project into eclipse.
 5.  Navigate to <sdkDirectory>/extras/google/google_play_services/lib_project and import google-play_services_lib/libs/ and copy the google-play-services.jar into the /libs/ directory of the GeoTag project in Eclipse.
-5.  After importing `GeoTag`, right click on the project -> `Properties` -> `Android`, and in the `Library` section Add both ActionBarSherlock and the Google Play Services.
-6. 
+5.  After importing `GeoTag`, right click on the project -> `Properties` -> `Android`, and in the `Library` section Add both ActionBarSherlock and the Google Play Services. 
 6.  Extract the zip downloaded in step 1, and place the contents of the /libs/ directory into the libs/ directory of the GeoTag Project.
 8.  Right click on the Project -> `Properties` -> `Java Build Path` -> `Projects` Tab, and add ActionBarSherlock and Google-Play_services_lib.
 

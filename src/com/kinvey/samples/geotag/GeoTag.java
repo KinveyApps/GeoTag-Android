@@ -36,13 +36,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyPingCallback;
 import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.Query;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
 import com.kinvey.java.query.MongoQueryFilter;
-import com.kinvey.samples.geotag.R;
 
 /**
  * @author edwardf
@@ -92,7 +92,6 @@ public class GeoTag extends SherlockActivity implements
 
             mKinveyClient = new Client.Builder(appKey, appSecret, this).build();
 
-//            ma = mKinveyClient.mappeddata(GeoTagEntity.class, COLLECTION_NAME);
             // fire off the ping call to ensure we can communicate with Kinvey
             testKinveyService();
         }
@@ -309,33 +308,36 @@ public class GeoTag extends SherlockActivity implements
 
         geoquery.withinBox("_geoloc", topleft.latitude, topleft.longitude, btmRight.latitude, btmRight.longitude);
 
-//        mKinveyClient.appData(COLLECTION_NAME, GeoTagEntity.class).get(geoquery, new KinveyListCallback<GeoTagEntity>() {
-//            @Override
-//            public void onSuccess(List<GeoTagEntity> result) {
-//                String msg = "query successfull, with a size of -> " + result.size();
-//                Log.i(TAG, msg);
-//                Toast.makeText(GeoTag.this, msg, Toast.LENGTH_LONG)
-//                        .show();
-//                for (GeoTagEntity gte : result) {
-//                    mMap.getMap()
-//                            .addMarker(
-//                                    new MarkerOptions()
-//                                            .position(
-//                                                    convertLocationToLatLng(gte
-//                                                            .getCoords()))
-//                                            .title(gte.getNote())
-//                                            .draggable(false)).showInfoWindow();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Throwable error) {
-//                String msg = "kinvey query fetch failed, " + error.getMessage();
-//                Toast.makeText(GeoTag.this, msg, Toast.LENGTH_LONG)
-//                        .show();
-//                Log.e(TAG, msg);
-//            }
-//        }); //TODO
+        mKinveyClient.appData(COLLECTION_NAME, GeoTagEntity.class).get(geoquery, new KinveyListCallback<GeoTagEntity>() {
+			
+			@Override
+			public void onSuccess(GeoTagEntity[] result) {
+	
+                String msg = "query successfull, with a size of -> " + result.length;
+                Log.i(TAG, msg);
+                Toast.makeText(GeoTag.this, msg, Toast.LENGTH_LONG)
+                        .show();
+                for (GeoTagEntity gte : result) {
+                    mMap.getMap()
+                            .addMarker(
+                                    new MarkerOptions()
+                                            .position(
+                                                    convertLocationToLatLng(gte
+                                                            .getCoords()))
+                                            .title(gte.getNote())
+                                            .draggable(false)).showInfoWindow();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable error) {
+                String msg = "kinvey query fetch failed, " + error.getMessage();
+                Toast.makeText(GeoTag.this, msg, Toast.LENGTH_LONG)
+                        .show();
+                Log.e(TAG, msg);
+            }
+
+        }); 
 
 
     }
@@ -367,25 +369,6 @@ public class GeoTag extends SherlockActivity implements
     	        });
     	    }
     	});
-    	
-    	
-       
-//        mKinveyClient.pingService(new KinveyCallback<Boolean>() {  TODO
-//
-//            public void onFailure(Throwable t) {
-//                Toast.makeText(GeoTag.this,
-//                        "kinvey ping failed, check assets/kinvey.properties",
-//                        Toast.LENGTH_LONG).show();
-//            }
-//
-//            @Override
-//            public void onSuccess(Boolean b) {
-//                Toast.makeText(GeoTag.this, "kinvey ping success!",
-//                        Toast.LENGTH_LONG).show();
-//            }
-//
-//        });
-
     }
 
 	/*
