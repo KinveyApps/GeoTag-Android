@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kinvey.sample.geotag"
+    package="com.kinvey.samples.geotag"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="14" />
 
     <permission
-        android:name="com.kinvey.sample.geotag.permission.MAPS_RECEIVE"
+        android:name="com.kinvey.samples.geotag.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.kinvey.sample.geotag.permission.MAPS_RECEIVE" />
@@ -27,7 +27,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Sherlock.Light.DarkActionBar" >
         <activity
-            android:name=".GeoTagActivity"
+            android:name=".GeoTag"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +38,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCjF0JnFCjPxxxOVTqfavCUdX2ZPF3jQRs" />
+            android:value="__GOOGLE_MAPS_API_KEY__" />
     </application>
 
 </manifest>
