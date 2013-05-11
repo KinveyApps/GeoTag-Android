@@ -16,7 +16,6 @@ package com.kinvey.samples.geotag;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -43,6 +42,7 @@ import com.kinvey.java.Query;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
 import com.kinvey.java.query.MongoQueryFilter;
+import com.kinvey.samples.geotag.R;
 
 /**
  * @author edwardf
@@ -50,9 +50,6 @@ import com.kinvey.java.query.MongoQueryFilter;
  */
 public class GeoTag extends SherlockActivity implements
         OnMapClickListener, OnInfoWindowClickListener {
-
-    private static final String appKey = "__KINVEY_APP_KEY__";
-    private static final String appSecret = "__KINVEY_APP_SECRET__";
 
     // reference the View object which renders the map itself
     private MapView mMap = null;
@@ -90,10 +87,21 @@ public class GeoTag extends SherlockActivity implements
 
             setListeners();
 
-            mKinveyClient = new Client.Builder(appKey, appSecret, this).build();
+            mKinveyClient = new Client.Builder(this).build();
 
-            // fire off the ping call to ensure we can communicate with Kinvey
-            testKinveyService();
+            //login and fire off the ping call to ensure we can communicate with Kinvey
+            mKinveyClient.user().login(new KinveyUserCallback() {
+                @Override
+                public void onSuccess(User result) {
+                    testKinveyService();
+                }
+
+                @Override
+                public void onFailure(Throwable error) {
+                    Toast.makeText(GeoTag.this, "Couldn't login -> " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            
         }
 
     }
@@ -378,15 +386,12 @@ public class GeoTag extends SherlockActivity implements
 	 * Note the Google Maps API uses LatLng, while Android uses Location.
 	 */
 
-    public static Location convertLatLngToLocation(LatLng latlng) {
-        Location loc = new Location(TAG);
-        loc.setLatitude(latlng.latitude);
-        loc.setLongitude(latlng.longitude);
-        return loc;
+    public static double[] convertLatLngToLocation(LatLng latlng) {
+        return new double[] {latlng.longitude, latlng.latitude};
     }
 
-    public static LatLng convertLocationToLatLng(Location loc) {
-        return new LatLng(loc.getLatitude(), loc.getLongitude());
+    public static LatLng convertLocationToLatLng(double[] loc) {
+        return new LatLng(loc[0], loc[1]);
     }
 
 }

@@ -29,7 +29,7 @@ public class GeoTagEntity extends GenericJson {
     @Key("note")
     private String note;
     @Key("_geoloc")
-    private Location coords;
+    private double[] coords;
 
     public GeoTagEntity() {}
 
@@ -49,11 +49,11 @@ public class GeoTagEntity extends GenericJson {
         this.note = nt;
     }
 
-    public Location getCoords() {
+    public double[] getCoords() {
         return coords;
     }
 
-    public void setCoords(Location coords) {
+    public void setCoords(double[] coords) {
         this.coords = coords;
     }
 
