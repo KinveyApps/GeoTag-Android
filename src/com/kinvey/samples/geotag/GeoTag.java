@@ -42,7 +42,6 @@ import com.kinvey.java.Query;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
 import com.kinvey.java.query.MongoQueryFilter;
-import com.kinvey.samples.geotag.R;
 
 /**
  * @author edwardf
