@@ -16,7 +16,7 @@ GeoTag is a sample application utilizing Google Map's API with Kinvey's Backend 
 6. Copy all jars in the **libs/** folder of the Kinvey Android library zip to TestDrive's **libs/** folder on the file system
 
 ###Android Studio
-1. In Android Studio, go to **File $rarr; New %rarr; Import Project**
+1. In Android Studio, go to **File &rarr; New &rarr; Import Project**
 2. **Browse** to the extracted zip from step 1, and click **OK**
 3. Click **Next** and **Finish**.
 4. Repeat Steps 1-3 for ActionBarSherlock, as well as ViewPagerIndicator.
