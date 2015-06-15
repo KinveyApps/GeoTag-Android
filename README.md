@@ -1,21 +1,50 @@
 GeoTag is a sample application utilizing Google Map's API with Kinvey's Backend to allow users to both add and view annotations on a map.
 
-## Get it running
-
-There are some initial steps required for getting this project to run:
-
-1.  [Download Kinvey's Android Library](http://devcenter.kinvey.com/android/downloads) and get your app-key and app-secret from the Kinvey console, by signing up and then creating a new app.\
-2.  Get a (free) Android google maps v2 API key by following the instructions listed here:
+## Set up Geotag Project
+1. Clone this repo
+2. Download the [ActionBar Sherlock Library](http://actionbarsherlock.com/)
+3. Get a (free) Android google maps v2 API key by following the instructions listed here:
 `https://developers.google.com/maps/documentation/android/start#creating_an_api_project`
-3.  Download [ActionBarSherlock](http://actionbarsherlock.com/) and in Eclipse, go `File` -> `New` -> `Android Project from Existing Source` and navigate to the ActionBarSherlock directory.
-4.  In Eclipse, go `File` -> `New` -> `Android project from Existing Source`, and navigate to the directory you downloaded the Android SDK, then goto: <sdkDirectory>/extras/google/google_play_services/lib_project and import google-play_services_lib as a project into eclipse.
-5.  Navigate to <sdkDirectory>/extras/google/google_play_services/lib_project and import google-play_services_lib/libs/ and copy the google-play-services.jar into the /libs/ directory of the GeoTag project in Eclipse.
-5.  After importing `GeoTag`, right click on the project -> `Properties` -> `Android`, and in the `Library` section Add both ActionBarSherlock and the Google Play Services. 
-6.  Extract the zip downloaded in step 1, and place the contents of the /libs/ directory into the libs/ directory of the GeoTag Project.
-8.  Right click on the Project -> `Properties` -> `Java Build Path` -> `Projects` Tab, and add ActionBarSherlock and Google-Play_services_lib.
+4. Download the latest Kinvey library (zip) and extract the downloaded zip file, from: http://devcenter.kinvey.com/android/downloads
 
+###Eclipse
+1. In Eclipse, go to __File &rarr; Import…__
+2. Click __Android &rarr; Existing Android Code into Workspace__
+3. __Browse…__ to set __Root Directory__ to the extracted zip from step 1
+4. Repeat steps 4 - 7 for the zip from step 2 and 3 as well.
+5. In the __Projects__ box, make sure the __HomeActivity__ project check box, the __library__ project from Action Bar Sherlock, and the __library__ project from ViewPagerIndicator are selected. Then click __Finish__.
+6. Copy all jars in the **libs/** folder of the Kinvey Android library zip to TestDrive's **libs/** folder on the file system
 
+###Android Studio
+1. In Android Studio, go to **File $rarr; New %rarr; Import Project**
+2. **Browse** to the extracted zip from step 1, and click **OK**
+3. Click **Next** and **Finish**.
+4. Repeat Steps 1-3 for ActionBarSherlock, as well as ViewPagerIndicator.
+4. **Browse** to the location of your project, and create a new folder called **lib** inside the **app** directory
+5. Copy all jars in the **libs/** folder of the Kinvey Android library zip to the **lib/** folder you just created
+6. Expand **Gradle Scripts** in the **Project** Window, and select `build.gradle(Module:app)`.
+7. Modify `dependencies` section, leaving any existing dependencies in place and replacing the `x.x.x` with the correct version number
 
+```java
+dependencies {    
+    compile files('lib/google-http-client-1.19.0.jar')
+    compile files('lib/google-http-client-android-1.19.0.jar')
+    compile files('lib/google-http-client-gson-1.19.0.jar')
+    compile files('lib/google-http-client-jackson2-1.19.0.jar')
+    compile files('lib/gson-2.1.jar')
+    compile files('lib/guava-18.0.jar')
+    compile files('lib/jackson-core-2.1.3.jar')
+    compile files('lib/kinvey-android-lib-x.x.x.jar')
+    compile files('lib/kinvey-java-x.x.x.jar')
+}
+```
+    
+
+8.  Click the **play** button to start a build, if you still see compilation errors ensure the versions are correctly defined in the dependencies list
+
+###Finally, for all IDEs
+7. Specify your app key and secret in `assets/kinvey.properties` constant variables
+`app.key` and `app.secret`
 
 
 Once you have all dependencies, an app-key, an app-secret, and a google Maps API key, let's get this sample running!
