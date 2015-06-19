@@ -87,20 +87,20 @@ public class GeoTag extends SherlockActivity implements
             setListeners();
 
             mKinveyClient = new Client.Builder(this).build();
-
             //login and fire off the ping call to ensure we can communicate with Kinvey
-            mKinveyClient.user().login(new KinveyUserCallback() {
-                @Override
-                public void onSuccess(User result) {
-                    testKinveyService();
-                }
-
-                @Override
-                public void onFailure(Throwable error) {
-                    Toast.makeText(GeoTag.this, "Couldn't login -> " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-            
+            if (!mKinveyClient.user().isUserLoggedIn()) {
+	            mKinveyClient.user().login(new KinveyUserCallback() {
+	                @Override
+	                public void onSuccess(User result) {
+	                    testKinveyService();
+	                }
+	
+	                @Override
+	                public void onFailure(Throwable error) {
+	                    Toast.makeText(GeoTag.this, "Couldn't login -> " + error.getMessage(), Toast.LENGTH_SHORT).show();
+	                }
+	            });
+            }
         }
 
     }
@@ -350,32 +350,20 @@ public class GeoTag extends SherlockActivity implements
     }
 
     public void testKinveyService() {
+        mKinveyClient.ping(new KinveyPingCallback() {
+            @Override
+            public void onSuccess(Boolean result) {
+                Toast.makeText(GeoTag.this, "kinvey ping success!",
+                        Toast.LENGTH_LONG).show();
+            }
 
-    	mKinveyClient.user().login(new KinveyUserCallback() {
-    	    @Override
-    	    public void onFailure(Throwable error) {
-    	        Log.e(TAG, "Login Failure", error);
-    	    }
-    	    
-    	    @Override
-    	    public void onSuccess(User result) {
-    	        Log.i(TAG,"Logged in successfully as " + result.getId());
-    	        mKinveyClient.ping(new KinveyPingCallback() {
-    	            @Override
-    	            public void onSuccess(Boolean result) {
-    	                Toast.makeText(GeoTag.this, "kinvey ping success!",
-    	                        Toast.LENGTH_LONG).show();
-    	            }
-
-    	            @Override
-    	            public void onFailure(Throwable error) {
-    	                Toast.makeText(GeoTag.this,
-    	                        "kinvey ping failed, check res/strings for appkey and appsecret",
-    	                        Toast.LENGTH_LONG).show();
-    	            }
-    	        });
-    	    }
-    	});
+            @Override
+            public void onFailure(Throwable error) {
+                Toast.makeText(GeoTag.this,
+                        "kinvey ping failed, check res/strings for appkey and appsecret",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 	/*
