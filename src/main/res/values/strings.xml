@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GeoTag</string>
+    <string name="enter_note">Enter Note</string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="menu_legal">Legal</string>
+    <string name="marker_default">Add a note!</string>
+
+</resources>
