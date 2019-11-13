@@ -2,5 +2,5 @@
 /.idea/
 /.gradle/
 /gradle/
-*.properties
 *.iml
+local.properties
