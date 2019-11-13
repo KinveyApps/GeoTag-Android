@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 Kinvey Inc.
+ * Copyright (c) 2019 Kinvey Inc.
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
  *
@@ -51,6 +51,7 @@ import com.kinvey.java.model.KinveyReadResponse
 import com.kinvey.java.query.MongoQueryFilter.MongoQueryFilterBuilder
 import com.kinvey.java.store.StoreType
 import com.kinvey.sample.geotag.Constants.COLLECTION_NAME
+import com.kinvey.sample.geotag.Constants.GEOLOC_NAME
 import com.kinvey.sample.geotag.Constants.REQUEST_LOCATION
 import kotlinx.android.synthetic.main.activity_geo_tag.*
 import timber.log.Timber
@@ -293,13 +294,13 @@ class GeoTagActivity : AppCompatActivity(), OnMapClickListener, OnInfoWindowClic
             // now that we have a bounding box of what's on screen, use a
             // SimpleQuery to query Kinvey's backend `withinBox`
             val geoquery = Query(MongoQueryFilterBuilder())
-            geoquery.withinBox("_geoloc", topleft.latitude, topleft.longitude, btmRight.latitude, btmRight.longitude)
+            geoquery.withinBox(GEOLOC_NAME, topleft.latitude, topleft.longitude, btmRight.latitude, btmRight.longitude)
             dataStore?.find(geoquery, object : KinveyReadCallback<GeoTagEntity> {
                 override fun onSuccess(result: KinveyReadResponse<GeoTagEntity>?) {
-                    val msg = "query successfull, with a size of -> " + result!!.result!!.size
+                    val msg = "query successfull, with a size of -> " + result?.result?.size
                     Timber.i(msg)
                     Toast.makeText(this@GeoTagActivity, msg, Toast.LENGTH_LONG).show()
-                    addGeoTagMarkers(result.result)
+                    addGeoTagMarkers(result?.result)
                 }
                 override fun onFailure(error: Throwable) {
                     val msg = "kinvey query fetch failed, " + error.message
@@ -339,7 +340,7 @@ class GeoTagActivity : AppCompatActivity(), OnMapClickListener, OnInfoWindowClic
 	     * Note the Google Maps API uses LatLng, while Android uses Location.
 	     */
         fun convertLatLngToLocation(latlng: LatLng): List<Double> {
-            return listOf(latlng.longitude, latlng.latitude)
+            return listOf(latlng.latitude, latlng.longitude)
         }
 
         fun convertLocationToLatLng(loc: List<Double>?): LatLng {
