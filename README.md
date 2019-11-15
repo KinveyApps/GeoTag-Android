@@ -4,17 +4,15 @@ GeoTag is a sample application utilizing Google Map's API with Kinvey's Backend 
 1. Clone this repo
 2. Get a (free) Android google maps v2 API key by following the instructions listed here:
 `https://developers.google.com/maps/documentation/android/start#creating_an_api_project`
-3. Download the latest Kinvey library (zip) and extract the downloaded zip file, from: http://devcenter.kinvey.com/android/downloads
 
 ###Android Studio
 1. In Android Studio, go to **File &rarr; New &rarr; Import Project**
 2. **Browse** to the extracted zip from step 1, and click **OK**
 3. Click **Next** and **Finish**.
-4. Copy all jars in the **libs/** folder of the Kinvey Android library zip to the **lib/** folder at the root of the project
-5.  Click the **play** button to start a build, if you still see compilation errors ensure the versions are correctly defined in the dependencies list
+4.  Click the **play** button to start a build, if you still see compilation errors ensure the versions are correctly defined in the dependencies list
 
 ###Finally, for all IDEs
-7. Specify your app key and secret in `assets/kinvey.properties` constant variables
+5. Specify your app key and secret in `assets/kinvey.properties` constant variables
 `app.key` and `app.secret`
 
 
@@ -51,17 +49,16 @@ This application demonstrates:
 
 * Storing and retreiving data from a collection
 * Simple geolocation querying
-* Integrating with Kinvey, Google Maps API, and ActionBarSherlock
+* Integrating with Kinvey, Google Maps API. This project is written in `Kotlin`.
 
 ## Design
 
-This sample utilizes both Google's support v4 package as well as Jake Wharton's ActionBarSherlock.  These dependencies are included, and should not require any configuration by the user (except the above mentioned API keys)
-
+This sample utilizes both Google's AndroidX standard support package as well as Google Services Maps API. These dependencies are included, and should not require any configuration by the user (except the above mentioned API keys)
 
 ##License
 
 
-Copyright (c) 2014 Kinvey Inc.
+Copyright (c) 2019 Kinvey Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
 in compliance with the License. You may obtain a copy of the License at
